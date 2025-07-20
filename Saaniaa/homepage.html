@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Surprise</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #fff0f5, #ffe0e0);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    #text {
+      font-size: 3em;
+      color: #d6336c;
+      opacity: 1;
+      transition: opacity 1s ease;
+      z-index: 1;
+    }
+
+    .fade-out {
+      opacity: 0;
+    }
+
+    .fade-in {
+      opacity: 1;
+    }
+
+    .floaty {
+      position: absolute;
+      top: -50px;
+      font-size: 2em;
+      animation: fall 6s linear infinite;
+      opacity: 0.85;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(110vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="text">I love you so much 💖</div>
+
+  <script>
+    const textDiv = document.getElementById("text");
+
+    // Fade out "I love you so much"
+    setTimeout(() => {
+      textDiv.classList.add("fade-out");
+    }, 2000);
+
+    // Show "Happy Rakshabandhan ❤"
+    setTimeout(() => {
+      textDiv.innerText = "Happy Rakshabandhan IMBI!!!!❤️";
+      textDiv.classList.remove("fade-out");
+      textDiv.classList.add("fade-in");
+    }, 3000);
+
+    // Emojis to float: flowers, hearts, rakhis
+    const floatEmojis = ["🌸", "❤️", "🪢"];
+
+    // Function to create one floaty emoji
+    function createFloaty() {
+      const floaty = document.createElement("div");
+      floaty.classList.add("floaty");
+
+      // Choose a random emoji
+      floaty.innerText = floatEmojis[Math.floor(Math.random() * floatEmojis.length)];
+
+      // Random position and animation speed
+      floaty.style.left = Math.random() * 100 + "vw";
+      floaty.style.animationDuration = 3 + Math.random() * 4 + "s";
+
+      document.body.appendChild(floaty);
+
+      // Remove after animation completes
+      setTimeout(() => {
+        floaty.remove();
+      }, 7000);
+    }
+
+    // Create emojis every 200ms
+    setInterval(createFloaty, 200);
+  </script>
+
+</body>
+</html>
+
+
